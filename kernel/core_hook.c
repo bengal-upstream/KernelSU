@@ -1001,6 +1001,8 @@ void susfs_try_umount_all(uid_t uid) {
 	ksu_try_umount("/data/adb/modules", false, MNT_DETACH, uid);
 	/* For both Legacy KSU and Magic Mount KSU */
 	ksu_try_umount("/debug_ramdisk", true, MNT_DETACH, uid);
+	// try umount /system/etc/hosts (hosts module)
+	ksu_try_umount("/system/etc/hosts", false, MNT_DETACH, uid);
 }
 #endif
 
@@ -1098,6 +1100,9 @@ out_ksu_try_umount:
 
 	// try umount ksu temp path
 	ksu_try_umount("/debug_ramdisk", false, MNT_DETACH);
+
+	// try umount /system/etc/hosts (hosts module)
+	ksu_try_umount("/system/etc/hosts", false, MNT_DETACH);
 #endif
 
 	return 0;
